@@ -1,13 +1,18 @@
-import { useUser } from "../auth/useUser"
-import NavBar from "../components/NavBar"
+import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import useAuthContext from "../auth/useAuthContext"
+
 
 
 const Instructor = () => {
-    const user = useUser()
+    const { user } = useAuthContext()
+    const navigate = useNavigate()
+    useEffect(()=> {
+        if ((!user || !user.courses[0]) && user.isAdmin) navigate('/admin')
+    },[user, navigate])    
 
     return(
         <>
-        {user ? <NavBar/> : <div/>}
         <h2>Welcome to the instructor view, Professor { user.lastName }</h2>
         </>
     )

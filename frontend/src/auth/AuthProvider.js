@@ -1,16 +1,46 @@
-import { useState, useContext } from "react";
-
+import { useState, useEffect } from 'react'
 import AuthContext from "./AuthContext";
 
 export const AuthProvider = ({children}) => {
-    const [ user, setUser ] = useState()
+
+    // formerly useToken
+    const [token, setTokenInternal] = useState(() => {
+        return localStorage.getItem('token');
+    })
+
+    const setToken = newToken => {
+        localStorage.setItem('token', newToken)
+        setTokenInternal(newToken)
+        console.log('new token', newToken)
+        if (newToken) setUser(getPayloadFromToken(newToken))
+        if (!newToken) setUser(null)
+    }
+
+    const getPayloadFromToken = token => {
+        if(!token) return {}
+        const encodedPayload = token.split('.')[1]
+        return JSON.parse(atob(encodedPayload))
+    }
+
+    // formerly useUser
+    const [user, setUser] = useState(() => {
+        if (!token) return null
+        return getPayloadFromToken(token)
+    })
+
+    // useEffect(() => {
+    //     if (!token) setUser(null)
+    //     if (token) setUser(getPayloadFromToken(token))
+    // }, [token])
 
     // put code to see if user is logged in here (from localStorage)
     // useEffect(() => {
     //     const currentUser = getUser()
     //     setUser(currentUser)
     // }, [])
+
+    const value = {user, token, setToken}
     return (
-        <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+        <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
     )
 }

@@ -1,11 +1,11 @@
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
+import useAuthContext from '../auth/useAuthContext'
 import { useToken } from '../auth/useToken'
 import { useUser } from '../auth/useUser'
 
 const NavBar = () => {
-    const user = useUser()
-    const [token, setToken] = useToken()
+    const {user, token, setToken} = useAuthContext()
     const navigate = useNavigate()
     
     const logOut = async () => {
@@ -20,8 +20,8 @@ const NavBar = () => {
         }
         setToken('')
     }
-
-    if (user) return (
+    console.log("Nav sees user: ", user)
+    return (
         <nav className="navbar navbar-expand-sm bg-light d-flex p-2">
             <div className="container-fluid">
                 <div className="navbar-brand">101 McAllister Scheduler</div>
@@ -29,16 +29,18 @@ const NavBar = () => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <Link to='/' className="nav-link">Instructor View</Link>
-                        <Link to='/admin' className="nav-link" >Administrator View</Link>
+                <div className="navbar-nav me-auto mb-2 mb-lg-0">
+                        { user && user.courses[0] && <Link to='/' className="nav-link">Instructor View</Link>}
+                        { user && user.isAdmin && <Link to='/admin' className="nav-link" >Administrator View</Link>}
                     </div>
-                    <div className=''><button className="btn btn-outline-primary me-2" onClick={logOut}>Log Out</button></div>
+
+                    {user && <div className=''><button className="btn btn-outline-primary me-2" onClick={logOut}>Log Out</button></div>}
                 </div>
+
+                
             </div>
         </nav>
     )
-    return <div/>
 }
 
 export default NavBar;

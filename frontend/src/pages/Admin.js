@@ -7,7 +7,6 @@ const Admin = () => {
 
     return(
         <>
-        <NavBar/>
         { user && user.isAdmin 
         ? 
         <h2>Welcome to the admin view, {user.firstName} </h2 > 

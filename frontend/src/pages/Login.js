@@ -1,7 +1,8 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { useToken } from '../auth/useToken'
+import api from '../api'
+import useAuthContext from '../auth/useAuthContext'
 
 
 
@@ -9,19 +10,25 @@ const Login = () => {
 
     const [username, setUsername] = useState('')
     const [error, setError] = useState('')
-    const [, setToken] = useToken()
 
+    const { user, setToken } = useAuthContext()
     const navigate = useNavigate()
+
+    useEffect( () => {
+        if (user) navigate('/')},[navigate, user]
+    )
 
     const submit = async () => {
         
         try {
-            const res = await axios.post('http://localhost:4000/auth/login', {"id": username})
+            const res = await axios.post(api + '/auth/login', {"id": username})
             const { token } = res.data
    
             setToken(token)
+            console.log(token)
             navigate('/')
         } catch (err) {
+            console.log(err)
             setError(err.response.data.message)
         }
     }

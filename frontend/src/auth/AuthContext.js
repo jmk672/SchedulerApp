@@ -1,6 +1,10 @@
 import { createContext } from 'react'
 
-const AuthContext = createContext()
+const AuthContext = createContext({
+    // user: null, 
+    // token: null, 
+    // setToken: () => {}
+})
 
 export default AuthContext
 

@@ -8,6 +8,7 @@ export const useToken = () => {
     const setToken = newToken => {
         localStorage.setItem('token', newToken)
         setTokenInternal(newToken)
+        console.log(newToken)
     }
 
     return [token, setToken]
