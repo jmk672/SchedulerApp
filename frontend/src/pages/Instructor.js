@@ -8,12 +8,13 @@ const Instructor = () => {
     const { user } = useAuthContext()
     const navigate = useNavigate()
     useEffect(()=> {
-        if ((!user || !user.courses[0]) && user.isAdmin) navigate('/admin')
+        if (!user) navigate('/login')
+        if (!user.courses[0] && user.isAdmin) navigate('/admin')
     },[user, navigate])    
 
     return(
         <>
-        <h2>Welcome to the instructor view, Professor { user.lastName }</h2>
+        <h2>Welcome to the instructor view, Professor {user && user.lastName }</h2>
         </>
     )
 }

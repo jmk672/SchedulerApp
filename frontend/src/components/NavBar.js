@@ -1,8 +1,7 @@
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import useAuthContext from '../auth/useAuthContext'
-import { useToken } from '../auth/useToken'
-import { useUser } from '../auth/useUser'
+
 
 const NavBar = () => {
     const {user, token, setToken} = useAuthContext()

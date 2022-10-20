@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { useUser } from "../auth/useUser"
-import NavBar from "../components/NavBar"
+
 
 const Admin = () => {
     const user = useUser()
