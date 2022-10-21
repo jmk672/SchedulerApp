@@ -15,7 +15,6 @@ export const login = async (req, res, next) => {
             const token = jwt.sign( {id: user.id, firstName: user.firstName, lastName: user.lastName, isAdmin: user.isAdmin, courses: user.courses, coordinates: user.coordinates}, process.env.JWT_SECRET, {expiresIn: "1d"})
             res
             .status(200)
-            .cookie("access_token", token, {httpOnly: true})
             .json({ token })
         }
 
@@ -33,7 +32,6 @@ export const logout = async (req, res, next) => {
     verifyToken(req, res, () => {
         res
         .status(200)
-        .clearCookie("access_token", {httpOnly: true})
         .json({message: "Logged out!"})
     })
 }

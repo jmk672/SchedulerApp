@@ -35,8 +35,6 @@ const NavBar = () => {
 
                     {user && <div className=''><button className="btn btn-outline-primary me-2" onClick={logOut}>Log Out</button></div>}
                 </div>
-
-                
             </div>
         </nav>
     )
