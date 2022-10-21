@@ -9,10 +9,16 @@ export const AuthProvider = ({children}) => {
     })
 
     const setToken = newToken => {
-        localStorage.setItem('token', newToken)
+        if (!newToken) localStorage.removeItem('token')
+            else localStorage.setItem('token', newToken)
         setTokenInternal(newToken)
         console.log('new token', newToken)
-        if (newToken) setUser(getPayloadFromToken(newToken))
+
+        
+        if (newToken) {
+            const newUser = getPayloadFromToken(newToken)
+            if (Date.now()/1000 > newUser.exp) localStorage.removeItem('token')
+            else setUser(newUser)}
         if (!newToken) setUser(null)
     }
 

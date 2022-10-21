@@ -17,7 +17,7 @@ const NavBar = () => {
         } catch (err) {
             console.log(err)
         }
-        setToken('')
+        setToken(null)
     }
     console.log("Nav sees user: ", user)
     return (
