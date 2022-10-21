@@ -13,9 +13,9 @@ const Instructor = () => {
     },[user, navigate])    
 
     return(
-        <>
-        <h2>Welcome to the instructor view, Professor {user && user.lastName }</h2>
-        </>
+        <div className='container'>
+            <h2>Welcome to the instructor view, Professor {user && user.lastName }</h2>
+        </div>
     )
 }
 
