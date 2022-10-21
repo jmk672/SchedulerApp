@@ -34,14 +34,14 @@ const Login = () => {
     }
 
     return(
-        <>
+        <div className = "container">
             {error ? 
                 <div className="alert alert-danger alert-dismissible fade show" role="alert">
                     {error}<button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={()=>{setError('')}}></button>
                 </div> : <div/>}
-            <input className="form-control" placeholder="user name" value={username} onChange={e => setUsername(e.target.value)}/>
-            <button disabled={!username} className="btn btn-primary" onClick={()=> submit(username)} >Log in</button>
-        </>
+            <input className="form-control m-1" placeholder="user name" value={username} onChange={e => setUsername(e.target.value)}/>
+            <button disabled={!username} className="btn btn-primary m-1" onClick={()=> submit(username)} >Log in</button>
+        </div>
     )
 }
 
