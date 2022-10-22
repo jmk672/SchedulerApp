@@ -17,14 +17,14 @@ function App() {
         <AuthProvider>
           <NavBar/>
             <div className="row">
-              <div className="col-md-3 col-lg-2 p-0 ps-2 border min-vh-100 ">
+              <div className="col-sm-3 col-md-3 col-lg-2 p-0 ps-2 border">
                 <Routes>
                   <Route path='/admin/*' element={ <AdminNav /> } />
                   <Route path='/instructor/*' element={ <InstructorNav /> } />
                   <Route path='*' element={<div/>}/>
                 </Routes>
               </div>
-              <div className="col-md-9 col-lg-10 border-top">
+              <div className="col-sm-9 col-md-9 col-lg-10 border-top border-left min-vh-100">
                 <Routes>
                   <Route path="/admin/home" element={ <Admin />} />
                   <Route path="/admin/addUser" element={ <h1>Add user</h1>} />
