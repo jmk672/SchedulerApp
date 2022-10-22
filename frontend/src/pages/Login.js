@@ -18,9 +18,6 @@ const Login = () => {
         if (user) navigate('/instructor/home')},[navigate, user]
     )
 
-    useEffect( () => {
-        if (error) setTimeout(() => {setError(null)}, 3000)
-    }, [error])
 
     const submit = async () => {
         
@@ -40,17 +37,17 @@ const Login = () => {
     return(
         <div className = "container">
             <div className = "row">
-                <div className = "col-md-4"/>
+                {/* <div className = "col-md-4"/> */}
                 <div className = "col-md-4">
-                    {error ? 
+                    {error && 
                         <div className="alert alert-danger alert-dismissible fade show m-1" role="alert">
                             {error}
-                            {/* <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={()=>{setError('')}}></button> */}
-                        </div> : <div/>}
-                    <input className="form-control m-1" placeholder="user name" value={username} onChange={e => setUsername(e.target.value)}/>
+                            {<button type="button" className="btn-close m-0" aria-label="Close" onClick={()=>{setError('')}}></button>}
+                        </div>}
+                    <input className="form-control my-1 mx-1" placeholder="user name" value={username} onChange={e => setUsername(e.target.value)}/>
                     <button disabled={!username} className="btn btn-primary m-1" onClick={()=> submit(username)} >Log in</button>
                 </div>
-                <div className = "col-md-4"/>
+                {/* <div className = "col-md-4"/> */}
             </div>
         </div>
     )
