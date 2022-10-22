@@ -24,7 +24,6 @@ const AdminNav = () => {
                     </div>
                 </div>
             </nav>
-
     )
 }
 
