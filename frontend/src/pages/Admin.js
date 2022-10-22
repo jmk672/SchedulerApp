@@ -1,15 +1,16 @@
 import { Link } from "react-router-dom"
-import { useUser } from "../auth/useUser"
-import AdminNav from "../components/AdminNav"
+import useAuthContext from "../auth/useAuthContext"
+
 
 
 const Admin = () => {
-    const user = useUser()
+    const { user } = useAuthContext()
+
 
     return(
-        <div className="row">
-            <AdminNav />
-            <div class="col-md-9 col-lg-10">
+        // <div className="row">
+        //     <AdminNav />
+        //     <div class="col-md-9 col-lg-10">
                 <div className="container">
                 { user && user.isAdmin 
                 ? 
@@ -18,8 +19,8 @@ const Admin = () => {
                 <><h2>Not authorized</h2>
                 <Link to='/'>Back Home</Link></>}
                 </div>
-            </div>
-        </div>
+        //     </div>
+        // </div>
     )
 }
 

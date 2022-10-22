@@ -8,6 +8,7 @@ import NotFound from './pages/NotFound';
 import NavBar from './components/NavBar';
 import { AuthProvider } from './auth/AuthProvider';
 import AdminNav from './components/AdminNav';
+import InstructorNav from './components/InstructorNav';
 
 function App() {
   return (
@@ -16,12 +17,24 @@ function App() {
         <AuthProvider>
           <NavBar/>
           <div className="row">
+            <div className="col-md-3 col-lg-2">
               <Routes>
-                <Route path="/admin" element={ <Admin />} />
-                <Route path="/" element={ <Instructor/>} />
+                <Route path='/admin/*' element={ <AdminNav /> } />
+                <Route path='/instructor/*' element={ <InstructorNav /> } />
+              </Routes>
+            </div>
+            <div className="col-md-9 col-lg-10">
+              <Routes>
+                <Route path="/admin/home" element={ <Admin />} />
+                <Route path="/admin/addUser" element={ <h1>Add user</h1>} />
+                <Route path="/admin/addExam" element={ <h1>Add new exam</h1>} />
+                <Route path="/admin/schedule" element={ <h1>Schedule makeup</h1>} />
+                <Route path="/instructor/home" element={ <Instructor/>} />
                 <Route path="/login" element={<Login/>} />
+                <Route exact path="/" element={<Login/>} />
                 <Route path="*" element={<NotFound/>} />
               </Routes>
+            </div>
           </div>
         </AuthProvider>
       </div>
