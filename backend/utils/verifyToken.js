@@ -9,12 +9,10 @@ export const verifyToken = async ( req, res, next ) => {
         return next(createError(401, "Not Authenticated"))
     }
     const token = authorization.split(' ')[1]
-    console.log(token)
 
     jwt.verify(token, process.env.JWT_SECRET, ( err, user ) => {
         if (err) return next(createError(403, "Token not valid"))
         req.user = user
-        console.log(user)
         next()
     })
     

@@ -12,10 +12,8 @@ const NavBar = () => {
             const res = await axios.post('http://localhost:4000/auth/logout/', {}, {
                 headers: { Authorization: `Bearer ${token}` }
             })
-            console.log(res)
             navigate('/login')
         } catch (err) {
-            console.log(err)
         }
         setToken(null)
     }

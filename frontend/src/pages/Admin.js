@@ -21,7 +21,6 @@ const Admin = () => {
                 })
             setData(_.sortBy(res.data,['lastName', 'firstName']))
         } catch (err) {
-            console.log(err)
             setError(err.response.data.message)
         }
     }

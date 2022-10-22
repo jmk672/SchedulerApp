@@ -31,10 +31,8 @@ const AddUser = () => {
             {
                 headers: { Authorization: `Bearer ${token}` }
             })
-            console.log(res)
             setSuccess(`User ${firstName} ${lastName} with id: ${id} created`)
         } catch (err) {
-            console.log(err)
             setError(err.response.data.message)
         }
     }

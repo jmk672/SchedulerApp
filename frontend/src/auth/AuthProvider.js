@@ -12,7 +12,6 @@ export const AuthProvider = ({children}) => {
         if (!newToken) localStorage.removeItem('token')
             else localStorage.setItem('token', newToken)
         setTokenInternal(newToken)
-        console.log('new token', newToken)
 
         
         if (newToken) {

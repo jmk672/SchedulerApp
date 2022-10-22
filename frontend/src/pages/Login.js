@@ -26,10 +26,8 @@ const Login = () => {
             const { token } = res.data
    
             setToken(token)
-            console.log(token)
             navigate('/instructor/home')
         } catch (err) {
-            console.log(err)
             setError(err.response.data.message)
         }
     }
