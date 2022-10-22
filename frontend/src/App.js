@@ -31,6 +31,8 @@ function App() {
                   <Route path="/admin/addExam" element={ <h1>Add new exam</h1>} />
                   <Route path="/admin/schedule" element={ <h1>Schedule makeup</h1>} />
                   <Route path="/instructor/home" element={ <Instructor/>} />
+                  <Route path="/instructor/addExam" element={ <h1>Add new exam</h1>} />
+                  <Route path="/instructor/schedule" element={ <h1>Schedule makeup</h1>} />
                   <Route path="/login" element={<Login/>} />
                   <Route exact path="/" element={<Login/>} />
                   <Route path="/404/" element={<NotFound/>} />
@@ -41,7 +43,6 @@ function App() {
         </AuthProvider>
       </div>
     </BrowserRouter>
-    
   );
 }
 
