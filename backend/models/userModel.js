@@ -22,9 +22,9 @@ const userSchema = new Schema({
         required: true,
         default: false
     },
-    courses: [{courseNumber: {type: Number, required: true},
-               sectionNumber: {type: Number, required: true}}],
-    coordinates: [{courseNumber: {type: Number, required: true}}]
+    courses: [{courseNumber: {type: String, required: true},
+               sectionNumber: {type: String, required: true}}],
+    coordinates: [{courseNumber: {type: String, required: true}}]
     }
 )
 

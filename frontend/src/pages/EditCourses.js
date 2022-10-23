@@ -9,6 +9,7 @@ import {VscAdd} from 'react-icons/vsc'
 const EditCourses = () => {
     const { token } = useAuthContext()
     const [error, setError] = useState()
+    const [success, setSuccess] = useState()
     const [data, setData] = useState()
     const [activeUser, setActiveUser] = useState()
     const [activeUserObject, setActiveUserObject] = useState()
@@ -32,18 +33,50 @@ const EditCourses = () => {
         if (activeUser) {
            setActiveUserObject(data.find(u => u.id===activeUser))
         }
-        else setActiveUserObject(null)
+        else setActiveUserObject(undefined)
     },[activeUser, data]
     )
-    const submit = (e) => {
+    const submit = async (e) => {
+        e.preventDefault()
+        try {
 
+            const courseArray = activeUserObject.courses.filter( (course) => (course.courseNumber && course.sectionNumber))
+            const res = await axios.patch(api + '/users/' + activeUser,
+            { courses: courseArray },
+            {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+            
+            setActiveUser('')
+            const tempdata = data.map((u, i) => {
+                if (u.id===activeUser) {
+                    const {courses, ...rest} = u
+                    return {courses: courseArray, ...rest}}
+                return u
+            }
+            )
+            setData(tempdata)
+            console.log(res)
+            setSuccess(`Updated user ${res.data.id}`)
+        }
+        catch (err) {
+            console.log(err)
+            setError(err.message)
+        }
+
+        
     }
     return (
         <div className="mt-4 mx-2 col-xl-6 col-lg-7 col-md-8">
              {error && 
-                <div className="alert alert-danger alert-dismissible fade show m-1" role="alert">
+                <div className="alert alert-danger alert-dismissible fade show my-1" role="alert">
                     {error}
                     {<button type="button" className="btn-close m-0" aria-label="Close" onClick={()=>{setError('')}}></button>}
+                </div>}
+            {success && 
+                <div className="alert alert-success alert-dismissible fade show my-1" role="alert">
+                    {success}
+                    {<button type="button" className="btn-close m-0" aria-label="Close" onClick={()=>{setSuccess('')}}></button>}
                 </div>}
             <form onSubmit={e => submit(e)}>
                 <div className="form-group">
@@ -77,7 +110,7 @@ const EditCourses = () => {
                 </div>
                 <button disabled={!activeUser} type="button" className="btn btn-outline-primary m-2" 
                     onClick={()=>{
-                        setActiveUserObject({ courses: activeUserObject.courses.concat([{courseNumber: null, sectionNumber: null}]) })}}>
+                        setActiveUserObject({ courses: activeUserObject.courses.concat([{courseNumber: '', sectionNumber: ''}]) })}}>
                         <VscAdd/></button>
                         <button disabled={!activeUser} type="submit" className="btn btn-primary btn-block m-1">Update</button>
             </form>

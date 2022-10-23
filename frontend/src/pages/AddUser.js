@@ -47,7 +47,7 @@ const AddUser = () => {
                     {success && 
                     <div className="alert alert-success alert-dismissible fade show m-1" role="alert">
                         {success}
-                        {<button type="button" className="btn-close m-0" aria-label="Close" onClick={()=>{setError('')}}></button>}
+                        {<button type="button" className="btn-close m-0" aria-label="Close" onClick={()=>{setSuccess('')}}></button>}
                     </div>}
                 {error && 
                     <div className="alert alert-danger alert-dismissible fade show m-1" role="alert">

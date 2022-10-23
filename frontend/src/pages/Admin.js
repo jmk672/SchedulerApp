@@ -38,7 +38,7 @@ const Admin = () => {
     return(
         <div className="container mx-2 my-4">
             {error && 
-                <div className="alert alert-danger alert-dismissible fade show m-1" role="alert">
+                <div className="alert alert-danger alert-dismissible fade show my-1" role="alert">
                     {error}
                     {<button type="button" className="btn-close m-0" aria-label="Close" onClick={()=>{setError('')}}></button>}
                 </div>}
@@ -48,7 +48,7 @@ const Admin = () => {
                     <div className="col-5">{listuser.firstName} {listuser.lastName}{listuser.isAdmin && ', administrator'}</div>
                     <div className="col-6">{listuser.courses && listuser.courses.map((course) => (
                     <div key={course._id}>Math {course.courseNumber}, section {course.sectionNumber} </div>))}</div>
-                    <div className="col-1">{user.id !== listuser.id && <button type="button" class="btn btn-outline-danger" onClick={()=>deleteUser(listuser.id)}><VscTrash/></button>}</div>
+                    <div className="col-1">{user.id !== listuser.id && <button type="button" className="btn btn-outline-danger" onClick={()=>deleteUser(listuser.id)}><VscTrash/></button>}</div>
                 </li>
                 ))}
             </ul>
