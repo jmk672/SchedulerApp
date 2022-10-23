@@ -44,15 +44,15 @@ const AddUser = () => {
     <div className="col-md-1"/>
     <div className="mt-4 mx-2 col-md-4">
         <form onSubmit={e => submit(e)}>
-            <div className="row mb-2">
+            <div className="row mt-2">
                 <div className="form-outline">
                     {success && 
-                    <div className="alert alert-success alert-dismissible fade show m-1" role="alert">
+                    <div className="alert alert-success alert-dismissible fade show my-2" role="alert">
                         {success}
                         {<button type="button" className="btn-close m-0" aria-label="Close" onClick={()=>{setSuccess('')}}></button>}
                     </div>}
                 {error && 
-                    <div className="alert alert-danger alert-dismissible fade show m-1" role="alert">
+                    <div className="alert alert-danger alert-dismissible fade show my-2" role="alert">
                         {error}
                         {<button type="button" className="btn-close m-0" aria-label="Close" onClick={()=>{setError('')}}></button>}
                     </div>}
@@ -76,7 +76,7 @@ const AddUser = () => {
                 <label className="form-label">Id (ex. abc123)</label>
             </div>
 
-            <div className="form-check d-flex  mb-2">
+            <div className="form-check d-flex  my-2">
                 <input className="form-check-input me-2" type="checkbox" checked={isAdmin} onChange={e => setIsAdmin(!isAdmin)} />
                 <label className="form-check-label">
                 Administrator User?

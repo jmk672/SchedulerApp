@@ -36,19 +36,18 @@ const Login = () => {
         <div className="row">
             <div className="col-md-1"/>
             <div className="mt-4 mx-2 col-md-3">
+                {error && 
+                    <div className="alert alert-danger alert-dismissible fade show my-1" role="alert">
+                        {error}
+                        {<button type="button" className="btn-close m-0" aria-label="Close" onClick={()=>{setError('')}}></button>}
+                    </div>}
                 <form onSubmit={e => submit(e)}>
-                    <div className="row mb-2">
-                        {error && 
-                            <div className="alert alert-danger alert-dismissible fade show m-1" role="alert">
-                                {error}
-                                {<button type="button" className="btn-close m-0" aria-label="Close" onClick={()=>{setError('')}}></button>}
-                            </div>}
+                    <div className="form-group">
                         <div className="form-outline">
                             <input className="form-control" placeholder="user name" value={username} onChange={e => setUsername(e.target.value)}/>
                         </div>
-                        </div>
-                        <button disabled={!username} type="submit" className="btn btn-primary btn-block mb-4" >Log in</button>
-                    {/* <div className = "col-md-4"/> */}
+                        <button disabled={!username} type="submit" className="btn btn-primary btn-block my-2" >Log in</button>
+                    </div>
                 </form>
             </div>
         </div>
