@@ -9,7 +9,7 @@ const Instructor = () => {
     const navigate = useNavigate()
     useEffect(()=> {
         if (!user) navigate('/login')
-        if (user && !user.courses[0] && user.isAdmin) navigate('/admin/home')
+        if (user && !user.courses[0] && user.isAdmin) navigate('/admin/users')
     },[user, navigate])    
 
     return(

@@ -92,14 +92,14 @@ const EditCourses = () => {
                     {/* <label>The Active User is: {activeUserObject && activeUserObject.firstName} {activeUserObject && activeUserObject.lastName}</label> */}
 
                     { activeUserObject && activeUserObject.courses[0] && activeUserObject.courses.map((c, i) => (
-                        <div className="row" key={i}> 
-                            <div className="col-md-6"><label>Course Number</label><input value={c.courseNumber} 
+                        <div className="row m-1" key={i}> 
+                            <div className="col-md-6"><label className="form-label">Course Number</label><input className="form-control" value={c.courseNumber} 
                                 onChange={(e)=>{ 
                                     let temp = activeUserObject.courses
                                     temp[i].courseNumber = e.target.value
                                     setActiveUserObject({ courses: temp })}}/>
                             </div> 
-                            <div className="col-md-6"><label>Section Number</label><input value={c.sectionNumber}
+                            <div className="col-md-6"><label className="form-label">Section Number</label><input className="form-control" value={c.sectionNumber}
                                 onChange={(e)=>{ 
                                     let temp = activeUserObject.courses
                                     temp[i].sectionNumber = e.target.value
