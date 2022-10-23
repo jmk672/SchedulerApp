@@ -3,7 +3,7 @@ import { createExam, getAllExams, getExamFile, getExamInfo } from '../controller
 
 // handles file uploads
 import multer from 'multer'
-import { verifyAdmin } from '../utils/verifyToken.js'
+import { verifyAdmin, verifyToken } from '../utils/verifyToken.js'
 const storage = multer.memoryStorage()
 const upload = multer({storage: storage})
 
@@ -12,13 +12,13 @@ const upload = multer({storage: storage})
 
 const router = express.Router()
 
-router.get('/', getAllExams) // do not send files with this one!!
+router.get('/', verifyAdmin, getAllExams) // do not send files with this one!!
 
-router.post('/', upload.single('file'), createExam)
+router.post('/', verifyToken, upload.single('file'), createExam)
 
-router.get('/file/:_id', verifyAdmin, getExamFile)
+router.get('/file/:_id', verifyToken, getExamFile)
 
-router.get('/info/:_id', getExamInfo)
+router.get('/info/:_id', verifyToken, getExamInfo)
 
 // router.delete('/:id', deleteExam)
 
