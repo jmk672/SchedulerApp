@@ -67,7 +67,9 @@ const EditCourses = () => {
         
     }
     return (
-        <div className="mt-4 mx-2 col-xl-6 col-lg-7 col-md-8">
+        <div className="row">
+        <div className="col-md-1"/>
+        <div className="mt-4 mx-2 col-md-4">
              {error && 
                 <div className="alert alert-danger alert-dismissible fade show my-1" role="alert">
                     {error}
@@ -92,14 +94,14 @@ const EditCourses = () => {
                     {/* <label>The Active User is: {activeUserObject && activeUserObject.firstName} {activeUserObject && activeUserObject.lastName}</label> */}
 
                     { activeUserObject && activeUserObject.courses[0] && activeUserObject.courses.map((c, i) => (
-                        <div className="row m-1" key={i}> 
-                            <div className="col-md-6"><label className="form-label">Course Number</label><input className="form-control" value={c.courseNumber} 
+                        <div className="row" key={i}> 
+                            <div className="col-md-6"><label className="form-label mb-0 mt-1">Course Number</label><input className="form-control" value={c.courseNumber} 
                                 onChange={(e)=>{ 
                                     let temp = activeUserObject.courses
                                     temp[i].courseNumber = e.target.value
                                     setActiveUserObject({ courses: temp })}}/>
                             </div> 
-                            <div className="col-md-6"><label className="form-label">Section Number</label><input className="form-control" value={c.sectionNumber}
+                            <div className="col-md-6"><label className="form-label mb-0 mt-1">Section Number</label><input className="form-control" value={c.sectionNumber}
                                 onChange={(e)=>{ 
                                     let temp = activeUserObject.courses
                                     temp[i].sectionNumber = e.target.value
@@ -108,12 +110,13 @@ const EditCourses = () => {
                         </div>
                     )) }
                 </div>
-                <button disabled={!activeUser} type="button" className="btn btn-outline-primary m-2" 
+                <button disabled={!activeUser} type="button" className="btn btn-outline-primary my-2 me-2" 
                     onClick={()=>{
                         setActiveUserObject({ courses: activeUserObject.courses.concat([{courseNumber: '', sectionNumber: ''}]) })}}>
                         <VscAdd/></button>
-                        <button disabled={!activeUser} type="submit" className="btn btn-primary btn-block m-1">Update</button>
+                        <button disabled={!activeUser} type="submit" className="btn btn-primary btn-block my-1">Update</button>
             </form>
+        </div>
         </div>
     )
 }

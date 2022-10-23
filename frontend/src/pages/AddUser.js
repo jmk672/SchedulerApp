@@ -40,7 +40,9 @@ const AddUser = () => {
     
 
     return(
-    <div className="mt-4 mx-2 col-xl-6 col-lg-7 col-md-8">
+    <div className="row">
+    <div className="col-md-1"/>
+    <div className="mt-4 mx-2 col-md-4">
         <form onSubmit={e => submit(e)}>
             <div className="row mb-2">
                 <div className="form-outline">
@@ -84,6 +86,7 @@ const AddUser = () => {
 
             <button disabled={!firstName || !lastName || !id} type="submit" className="btn btn-primary btn-block mb-4">Add User</button>
         </form>
+    </div>
     </div>
     )
 }
