@@ -1,5 +1,5 @@
 import useAuthContext from "../auth/useAuthContext"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 //import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import api from "../api"
@@ -32,6 +32,7 @@ const AddUser = () => {
                 headers: { Authorization: `Bearer ${token}` }
             })
             setSuccess(`User ${firstName} ${lastName} with id: ${id} created`)
+            console.log(res.status)
         } catch (err) {
             setError(err.response.data.message)
         }

@@ -12,6 +12,7 @@ const NavBar = () => {
             const res = await axios.post('http://localhost:4000/auth/logout/', {}, {
                 headers: { Authorization: `Bearer ${token}` }
             })
+            console.log(res.status)
             navigate('/login')
         } catch (err) {
         }
@@ -27,7 +28,7 @@ const NavBar = () => {
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav me-auto mb-2 mb-lg-0">
                         { user && user.courses[0] && <div className='nav-item'><Link to='/instructor/home' className="nav-link">Instructor View</Link></div>}
-                        { user && user.isAdmin && <div className='nav-item'><Link to='/admin/home' className="nav-link" >Administrator View</Link></div>}
+                        { user && user.isAdmin && <div className='nav-item'><Link to='/admin/users' className="nav-link" >Administrator View</Link></div>}
                     </div>
                     {user && <div className='nav-item'><button className="btn btn-outline-primary me-2" onClick={logOut}>Log Out</button></div>}
                     

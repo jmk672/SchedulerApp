@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
 import useAuthContext from "../auth/useAuthContext"
 import axios from "axios"
 import api from "../api"
@@ -28,10 +27,11 @@ const Admin = () => {
     },[token])
 
     const deleteUser = async (id) => {
-        const res = await axios.delete(api + '/users/' + id,
+        await axios.delete(api + '/users/' + id,
         {
             headers: { Authorization: `Bearer ${token}` }
         })
+        setError(`User ${id} deleted`)
         setData(data.filter(user => user.id !== id))
     }
 

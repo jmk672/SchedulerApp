@@ -10,6 +10,7 @@ import { AuthProvider } from './auth/AuthProvider';
 import AdminNav from './components/AdminNav';
 import InstructorNav from './components/InstructorNav';
 import AddUser from './pages/AddUser';
+import EditCourses from './pages/EditCourses';
 
 function App() {
   return (
@@ -27,8 +28,9 @@ function App() {
               </div>
               <div className="col-sm-9 col-md-9 col-lg-10 border-top border-left min-vh-100">
                 <Routes>
-                  <Route path="/admin/home" element={ <Admin />} />
+                  <Route path="/admin/users" element={ <Admin />} />
                   <Route path="/admin/addUser" element={ <AddUser />} />
+                  <Route path="/admin/editCourses" element={ <EditCourses />} />
                   <Route path="/admin/addExam" element={ <h1>Add new exam</h1>} />
                   <Route path="/admin/schedule" element={ <h1>Schedule makeup</h1>} />
                   <Route path="/instructor/home" element={ <Instructor/>} />
