@@ -89,7 +89,7 @@ const EditCourses = () => {
                             </option>
                         ))}
                     </select>
-                    <label>The Active User is: {activeUserObject && activeUserObject.firstName} {activeUserObject && activeUserObject.lastName}</label>
+                    {/* <label>The Active User is: {activeUserObject && activeUserObject.firstName} {activeUserObject && activeUserObject.lastName}</label> */}
 
                     { activeUserObject && activeUserObject.courses[0] && activeUserObject.courses.map((c, i) => (
                         <div className="row" key={i}> 

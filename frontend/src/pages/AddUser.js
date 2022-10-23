@@ -42,7 +42,7 @@ const AddUser = () => {
     return(
     <div className="mt-4 mx-2 col-xl-6 col-lg-7 col-md-8">
         <form onSubmit={e => submit(e)}>
-            <div className="row mb-4">
+            <div className="row mb-2">
                 <div className="form-outline">
                     {success && 
                     <div className="alert alert-success alert-dismissible fade show m-1" role="alert">
@@ -69,12 +69,12 @@ const AddUser = () => {
                 </div>
             </div>
 
-            <div className="form-outline mb-4">
+            <div className="form-outline mb-2">
                 <input type="text" className="form-control" value={id} onChange={e => setId(e.target.value)}/>
                 <label className="form-label">Id (ex. abc123)</label>
             </div>
 
-            <div className="form-check d-flex  mb-4">
+            <div className="form-check d-flex  mb-2">
                 <input className="form-check-input me-2" type="checkbox" checked={isAdmin} onChange={e => setIsAdmin(!isAdmin)} />
                 <label className="form-check-label">
                 Administrator User?
