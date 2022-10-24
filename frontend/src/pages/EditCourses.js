@@ -101,7 +101,7 @@ const EditCourses = () => {
                                     temp[i].courseNumber = e.target.value
                                     setActiveUserObject({ courses: temp })}}/>
                             </div> 
-                            <div className="col-md-6"><label className="form-label mb-0 mt-1">Section Number</label><input className="form-control" value={c.sectionNumber}
+                            <div className="col-md-6"><label className="form-label mb-0 mt-1">Section Number</label><input type="number" min="1" className="form-control" value={c.sectionNumber}
                                 onChange={(e)=>{ 
                                     let temp = activeUserObject.courses
                                     temp[i].sectionNumber = e.target.value
