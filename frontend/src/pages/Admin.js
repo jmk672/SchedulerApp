@@ -52,6 +52,7 @@ const Admin = () => {
                 </li>
                 ))}
             </ul>
+            <div className="alert alert-warning my-2" role="alert">Note: Deleting a user will not delete any exams or appointments</div>
         </div>
     )
 }
