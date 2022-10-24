@@ -43,6 +43,11 @@ const Admin = () => {
                     {<button type="button" className="btn-close m-0" aria-label="Close" onClick={()=>{setError('')}}></button>}
                 </div>}
             <ul className="list-group">
+                <li className="list-group-item d-flex border-bottom border-3" key="legend">
+                    <div className="col-5">Name</div>
+                    <div className="col-6">Courses</div>
+                    <div className="col-1">Delete</div>
+                </li>
                 {data && data.map((listuser) => (
                 <li className="list-group-item d-flex" key={listuser._id}>
                     <div className="col-5">{listuser.firstName} {listuser.lastName}{listuser.isAdmin && ', administrator'}</div>

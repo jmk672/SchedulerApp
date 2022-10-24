@@ -69,3 +69,14 @@ export const getExamInfo = async (req, res, next) => {
         next(err)
     }
 }
+
+export const deleteExam = async (req, res, next) => {
+    try {
+        console.log(req.params._id)
+        const exam = await Exam.findByIdAndDelete(req.params._id)
+        res.status(200).json(exam)
+        console.log(exam)
+    } catch (err) {
+        next(err)
+    }
+}

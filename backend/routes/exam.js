@@ -1,5 +1,5 @@
 import express from 'express'
-import { createExam, getAllExams, getExamFile, getExamInfo } from '../controllers/exam.js'
+import { createExam, getAllExams, getExamFile, getExamInfo, deleteExam } from '../controllers/exam.js'
 
 // handles file uploads
 import multer from 'multer'
@@ -20,7 +20,7 @@ router.get('/file/:_id', verifyToken, getExamFile)
 
 router.get('/info/:_id', verifyToken, getExamInfo)
 
-// router.delete('/:id', deleteExam)
+router.delete('/:_id', verifyAdmin, deleteExam)
 
 
 export default router

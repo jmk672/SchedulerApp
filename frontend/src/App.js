@@ -11,6 +11,7 @@ import AdminNav from './components/AdminNav';
 import InstructorNav from './components/InstructorNav';
 import AddUser from './pages/AddUser';
 import EditCourses from './pages/EditCourses';
+import AllExams from './pages/AllExams';
 
 function App() {
   return (
@@ -31,7 +32,9 @@ function App() {
                   <Route path="/admin/users" element={ <Admin />} />
                   <Route path="/admin/addUser" element={ <AddUser />} />
                   <Route path="/admin/editCourses" element={ <EditCourses />} />
+                  <Route path="/admin/allExams" element={ <AllExams />} />
                   <Route path="/admin/addExam" element={ <h1>Add new exam</h1>} />
+                  <Route path="/admin/allAppointments" element={ <h1>All Appointments</h1>} />
                   <Route path="/admin/schedule" element={ <h1>Schedule makeup</h1>} />
                   <Route path="/instructor/home" element={ <Instructor/>} />
                   <Route path="/instructor/addExam" element={ <h1>Add new exam</h1>} />
