@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const examSchema = new Schema({
     name: {type: String, required: true},
     owner: {type: String, required: true},
-    courseNumber: {type: Number, required: true},
+    courseNumber: {type: String, required: true},
     isCoordinated: {type: Boolean, required: true, default: false},
     standardLength: {type: Number, required: true},
     calculator: {type: String, required: true, default: "none"},
