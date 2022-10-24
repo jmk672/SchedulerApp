@@ -16,9 +16,9 @@ router.get('/', verifyAdmin, getAllExams) // do not send files with this one!!
 
 router.post('/', verifyToken, upload.single('file'), createExam)
 
-router.get('/file/:_id', getExamFile)
+router.get('/file/:_id', verifyToken, getExamFile)
 
-router.get('/info/:_id', getExamInfo)
+router.get('/info/:_id', verifyToken, getExamInfo)
 
 router.delete('/:_id', verifyAdmin, deleteExam)
 
