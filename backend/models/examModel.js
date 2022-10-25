@@ -13,7 +13,7 @@ const examSchema = new Schema({
     other: {type: String, default: "none"},
     file: {
         data: Buffer, 
-        contentType: String }  // I need to figure out how to deal with files
+        contentType: String } 
 })
 
 export default mongoose.model('Exam', examSchema)
