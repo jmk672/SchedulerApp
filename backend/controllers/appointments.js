@@ -35,7 +35,9 @@ export const createAppointment = async ( req, res, next ) => {
 export const findATime = async (req, res, next) => {
     try {
         const day = req.params.day
+        console.log(day)
         const length = Math.ceil(req.params.length/15)
+        console.log(length)
         const appointments = await Appointment.find({})
         const hours = await Hours.findOne({date: day})
         
