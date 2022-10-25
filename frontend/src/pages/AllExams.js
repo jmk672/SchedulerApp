@@ -18,7 +18,7 @@ const AllExams = () => {
                 {
                     headers: { Authorization: `Bearer ${token}` }
                 })
-            setData(_.sortBy(res.data,['owner']))
+            setData(_.sortBy(res.data,['owner', 'courseNumber', 'name']))
         } catch (err) {
             setError(err.response.data.message)
         }
@@ -79,10 +79,13 @@ const AllExams = () => {
                 {data && data.map((listexam) => (
                 <li className="list-group-item d-flex" key={listexam._id}>
                     <div className="col-3">{listexam.owner}</div>
-                    <div className="col-3">{listexam.name}</div>
-                    <div className="col-5">
+                    <div className="col-3">
                         <div >Course: Math {listexam.courseNumber}</div>
+                        <div>{listexam.name}</div>
                         {listexam.isCoordinated && <div className="text-danger">Coordinated</div>}
+                    </div>
+                    <div className="col-5">
+                        
                         <div>Length: {listexam.standardLength}</div>
                         <div>Calculator: {listexam.calculator}</div>
                         <div>Notes: {listexam.notes}</div>
