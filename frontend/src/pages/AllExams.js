@@ -40,6 +40,34 @@ const AllExams = () => {
         }
     }
 
+
+    const openFile = async (id, name) => {
+        try {
+            const res = await axios.get( api + '/exams/file/' + id,
+            {
+                headers: { Authorization: `Bearer ${token}` },
+                responseType: "blob"
+            }
+            )
+
+            console.log(res)
+            const a = document.createElement("a")
+            
+            const file = new Blob([res.data], { type: 'application/pdf' })
+
+            a.href = URL.createObjectURL(file)
+
+            a.setAttribute("download", name + '.pdf')
+
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+
+        } catch (err) {
+        console.log(err.messaes)
+        }
+    } 
+
     return(
         <div className="container mx-2 my-4">
             {error && 
@@ -59,7 +87,7 @@ const AllExams = () => {
                         <div>Calculator: {listexam.calculator}</div>
                         <div>Notes: {listexam.notes}</div>
                         <div>Other: {listexam.calculator}</div>
-                        <div><button type="button" className="btn btn-outline-success"><VscFilePdf/></button></div>
+                        <div><button type="button" className="btn btn-outline-success" onClick={()=> openFile(listexam._id, listexam.name)}><VscFilePdf/></button></div>
                     </div>
                     <div className="col-1"><button type="button" className="btn btn-outline-danger" onClick={()=>deleteExam(listexam._id, listexam.name)}><VscTrash/></button></div>
                 </li>
