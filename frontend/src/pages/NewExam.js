@@ -6,14 +6,14 @@ import api from "../api"
 
 const NewExam = () => {
 
-        const [name, setName] = useState()
-        const [owner, setOwner] = useState()
+        const [name, setName] = useState('')
+        const [owner, setOwner] = useState('')
         const [courseNumber, setCourseNumber] = useState()
         const [isCoordinated, setIsCoordinated] = useState(false)
-        const [standardLength, setStandardLength] = useState()
-        const [calculator, setCalculator] = useState()
-        const [notes, setNotes] = useState()
-        const [other, setOther] = useState()
+        const [standardLength, setStandardLength] = useState('')
+        const [calculator, setCalculator] = useState('')
+        const [notes, setNotes] = useState('')
+        const [other, setOther] = useState('')
         const [file, setFile] = useState()
     
         const [error, setError] = useState('')
@@ -34,9 +34,9 @@ const NewExam = () => {
                 form.append('courseNumber', courseNumber)
                 form.append('isCoordinated', isCoordinated)
                 form.append('standardLength', standardLength)
-                form.append('calculator', calculator)
-                form.append('notes', notes)
-                form.append('other', other)
+                if (calculator) form.append('calculator', calculator)
+                if (notes) form.append('notes', notes)
+                if (calculator) form.append('other', other)
                 form.append('file', file)
 
                 const res = await axios.post(api + '/exams', 
