@@ -20,10 +20,11 @@ const AdminNav = () => {
                     <NavLink id="users" className='list-group-item list-group-item-action py-2'  to="/admin/users"><span>All Users</span></NavLink>
                     <NavLink id="addUser" className='list-group-item list-group-item-action py-2'  to="/admin/addUser"><span>Add User</span></NavLink>
                     <NavLink id="addUser" className='list-group-item list-group-item-action py-2'  to="/admin/editCourses"><span>Edit User's Courses</span></NavLink>
-                    <NavLink id="addExam" className='list-group-item list-group-item-action py-2'  to="/admin/allExams"><span>All Exams</span></NavLink>
+                    <NavLink id="allExams" className='list-group-item list-group-item-action py-2'  to="/admin/allExams"><span>All Exams</span></NavLink>
                     <NavLink id="addExam" className='list-group-item list-group-item-action py-2'  to="/admin/addExam"><span>Add New Exam</span></NavLink>
-                    <NavLink id="addExam" className='list-group-item list-group-item-action py-2'  to="/admin/allAppointments"><span>All Appointments</span></NavLink>
+                    <NavLink id="allAppointments" className='list-group-item list-group-item-action py-2'  to="/admin/allAppointments"><span>All Appointments</span></NavLink>
                     <NavLink id="schedule" className='list-group-item list-group-item-action py-2'  to="/admin/schedule"><span>Schedule Makeup</span></NavLink>
+                    <NavLink id="Set Hours" className='list-group-item list-group-item-action py-2'  to="/admin/setHours"><span>Set Hours</span></NavLink>
                     </div>
                 </div>
             </nav>
