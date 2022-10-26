@@ -76,6 +76,11 @@ const AllExams = () => {
                     {<button type="button" className="btn-close m-0" aria-label="Close" onClick={()=>{setError('')}}></button>}
                 </div>}
             <ul className="list-group">
+                <li className="list-group-item d-flex border-bottom border-3" key="legend">
+                    <div className="col-3">Owner</div>
+                    <div className="col-3">Course and Exam Name</div>
+                    <div className="col-5">Other Info</div>
+                </li>
                 {data && data.map((listexam) => (
                 <li className="list-group-item d-flex" key={listexam._id}>
                     <div className="col-3">{listexam.owner}</div>
