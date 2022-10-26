@@ -1,5 +1,6 @@
 import express from 'express'
 import { deleteHours, getHours, setHours } from '../controllers/hours.js'
+import { verifyToken } from '../utils/verifyToken.js'
 
 // mongoose model
 import Hours from '../models/hoursModel.js'
@@ -10,7 +11,7 @@ const router = express.Router()
 
 // get all times
 
-router.get('/', getHours)
+router.get('/', verifyToken, getHours)
 
 // set an available time
 
