@@ -13,7 +13,7 @@ import AddUser from './pages/AddUser';
 import EditCourses from './pages/EditCourses';
 import AllExams from './pages/AllExams';
 import NewExam from './pages/NewExam';
-import SetHours from './pages/EditHours';
+import SetHours from './pages/SetHours';
 
 function App() {
   return (
