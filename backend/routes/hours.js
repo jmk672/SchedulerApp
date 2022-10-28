@@ -1,6 +1,6 @@
 import express from 'express'
-import { deleteHours, getHours, setHours } from '../controllers/hours.js'
-import { verifyToken } from '../utils/verifyToken.js'
+import { deleteHours, getHours, setHours, batchHours } from '../controllers/hours.js'
+import { verifyAdmin, verifyToken } from '../utils/verifyToken.js'
 
 // mongoose model
 import Hours from '../models/hoursModel.js'
@@ -15,7 +15,9 @@ router.get('/', verifyToken, getHours)
 
 // set an available time
 
-router.post('/', setHours)
+router.post('/', verifyAdmin, setHours)
+
+router.post('/batch', verifyAdmin, batchHours)
 
 // remove a timeslot ( should be pretty rare - will need warnings!!)
 
