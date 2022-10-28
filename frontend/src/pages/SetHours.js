@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import api from "../api"
 import _ from 'lodash'
-import { VscAdd } from "react-icons/vsc"
+import { VscTrash } from "react-icons/vsc"
 
 const SetHours = () => {
     const { token } = useAuthContext()
@@ -26,23 +26,25 @@ const SetHours = () => {
     const [fridayClose, setFridayClose] = useState()
     const [saturdayOpen, setSaturdayOpen] = useState()
     const [saturdayClose, setSaturdayClose] = useState()
+    const [update, setUpdate] = useState(false)
 
-    // I don't think we need to fetch the current data. This can just overwrite the hours...
+    // Fetch current data for display
     //
-    // useEffect( () => {
-    //     const fetch = async () => {
-    //     try {
-    //         const res = await axios.get(api + '/hours/',
-    //             {
-    //                 headers: { Authorization: `Bearer ${token}` }
-    //             })
-    //         setData(_.sortBy(res.data,['date']))
-    //     } catch (err) {
-    //         setError(err.response.data.message)
-    //     }
-    // }
-    // fetch()
-    // },[token])
+    useEffect( () => {
+        const fetch = async () => {
+        try {
+            const res = await axios.get(api + '/hours/',
+                {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
+            setData(_.sortBy(res.data,['date']))
+        } catch (err) {
+            setError(err.response.data.message)
+        }
+    }
+    fetch()
+    setUpdate(false)
+    },[token, update])
 
     const toLocaleISO = (day) => {
         const str = day.toLocaleDateString()
@@ -53,7 +55,7 @@ const SetHours = () => {
     const submit = async (e) => {
         e.preventDefault()
 
-        console.log(JSON.stringify({
+        const postData = {
             sundayCode: weeksArray.find((week) => week.sundayCode === activeWeek).sundayCode, 
             sundayOpen: sundayOpen, 
             sundayClose: sundayClose,
@@ -75,33 +77,23 @@ const SetHours = () => {
             saturdayCode: weeksArray.find((week) => week.sundayCode === activeWeek).saturdayCode,
             saturdayOpen: saturdayOpen, 
             saturdayClose: saturdayClose,
-            
-        }))
-        // try {
+        }
+        try {
 
-        //     const courseArray = activeUserObject.courses.filter( (course) => (course.courseNumber && course.sectionNumber))
-        //     const res = await axios.patch(api + '/users/' + activeUser,
-        //     { courses: courseArray },
-        //     {
-        //         headers: { Authorization: `Bearer ${token}` }
-        //     })
-            
-        //     setActiveUser('')
-        //     const tempdata = data.map((u, i) => {
-        //         if (u.id===activeUser) {
-        //             const {courses, ...rest} = u
-        //             return {courses: courseArray, ...rest}}
-        //         return u
-        //     }
-        //     )
-        //     setData(tempdata)
-        //     console.log(res)
-        //     setSuccess(`Updated user ${res.data.id}`)
-        // }
-        // catch (err) {
-        //     console.log(err)
-        //     setError(err.message)
-        // }
+            const res = await axios.post(api + '/hours/batch',
+            postData,
+            {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+
+            console.log(res)
+            setSuccess(`Updated hours`)
+            setUpdate(true)
+        }
+        catch (err) {
+            console.log(err)
+            setError(err.message)
+        }
     }
 
 
@@ -127,7 +119,7 @@ const SetHours = () => {
 
         var tempArray = []
 
-        for (var i=0; i<30; i++) {
+        for (var i=0; i<25; i++) {
             tempArray.push({
                 sunday: nextSunday.toDateString(),
                 sundayCode: toLocaleISO(nextSunday),
@@ -139,8 +131,13 @@ const SetHours = () => {
                 saturdayCode: toLocaleISO(nextSaturday),
                 saturday: nextSaturday.toDateString()
             })
-            toLocaleISO(nextSunday)
+
             nextSunday.setDate(nextSunday.getDate()+7)
+            nextMonday.setDate(nextMonday.getDate()+7)
+            nextTuesday.setDate(nextTuesday.getDate()+7)
+            nextWednesday.setDate(nextWednesday.getDate()+7)
+            nextThursday.setDate(nextThursday.getDate()+7)
+            nextFriday.setDate(nextFriday.getDate()+7)
             nextSaturday.setDate(nextSaturday.getDate()+7)
             }
 
@@ -148,6 +145,10 @@ const SetHours = () => {
 
         }, []
     )
+
+    const deleteWeek = (week) => {
+        console.log(week)
+    }
 
     return (
         <div className="row">
@@ -453,6 +454,53 @@ const SetHours = () => {
             </form>
             <div className="alert alert-warning my-2 p-3" role="alert">Note: This will overrite any previously saved hours.</div>
             <div className="alert alert-warning my-2 p-3" role="alert">Any day without both an open and close time will not be saved.</div>
+
+            {data && weeksArray.map((week) => {
+                const sundayHours = data.find( e => e.date === week.sundayCode)
+                    
+                const mondayHours = data.find( e => e.date === week.mondayCode)
+                const tuesdayHours = data.find( e => e.date === week.tuesdayCode)
+                const wednesdayHours = data.find( e => e.date === week.wednesdayCode)
+                const thursdayHours = data.find( e => e.date === week.thursdayCode)
+                const fridayHours = data.find( e => e.date === week.fridayCode)
+                const saturdayHours = data.find( e => e.date === week.saturdayCode)
+                
+                if (sundayHours || mondayHours || tuesdayHours || wednesdayHours || thursdayHours || fridayHours || saturdayHours)
+                return (<div>{week.sunday} through {week.saturday}
+                        <div key = {week.sundayCode} className="row">
+                        <div className="col">
+                            <div>Sunday</div>
+                            {sundayHours && <div>{sundayHours.startTime} to {sundayHours.endTime}</div>}
+                        </div>
+                        <div className="col">
+                            <div>Monday</div>
+                            {mondayHours && <div>{mondayHours.startTime} to {mondayHours.endTime}</div>}
+                        </div>
+                        <div className="col">
+                            <div>Tuesday</div>
+                            {tuesdayHours && <div>{tuesdayHours.startTime} to {tuesdayHours.endTime}</div>}
+                        </div>
+                        <div className="col">
+                            <div>Wednesday</div>
+                            {wednesdayHours && <div>{wednesdayHours.startTime} to {wednesdayHours.endTime}</div>}
+                        </div>
+                        <div className="col">
+                            <div>Thursday</div>
+                            {thursdayHours && <div>{thursdayHours.startTime} to {thursdayHours.endTime}</div>}
+                        </div>
+                        <div className="col">
+                            <div>Friday</div>
+                            {fridayHours && <div>{fridayHours.startTime} to {fridayHours.endTime}</div>}
+                        </div>
+                        <div className="col">
+                            <div>Saturday</div>
+                            {saturdayHours && <div>{saturdayHours.startTime} to {saturdayHours.endTime}</div>}
+                        </div>
+                        <div className="col-1"><button type="button" className="btn btn-outline-danger" onClick={()=>deleteWeek(week)}><VscTrash/></button></div>
+                    </div>
+                    </div>)
+                else return <div key = {week.sundayCode} className="row"/>
+            })}
         </div>
         </div>
     )
