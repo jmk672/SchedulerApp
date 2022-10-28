@@ -146,8 +146,31 @@ const SetHours = () => {
         }, []
     )
 
-    const deleteWeek = (week) => {
-        console.log(week)
+    const deleteWeek = async (week) => {
+        try {
+            const postData = {
+                sundayCode: week.sundayCode,
+                mondayCode: week.mondayCode,
+                tuesdayCode: week.tuesdayCode,
+                wednesdayCode: week.wednesdayCode,
+                thursdayCode: week.thursdayCode,
+                fridayCode: week.fridayCode,
+                saturdayCode: week.saturdayCode,
+            }
+            const res = await axios.post(api + '/hours/batch',
+            postData,
+            {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+
+            console.log(res)
+            setSuccess(`Deleted hours`)
+            setUpdate(true)
+        }
+        catch (err) {
+            console.log(err)
+            setError(err.message)
+        }
     }
 
     return (
@@ -466,8 +489,8 @@ const SetHours = () => {
                 const saturdayHours = data.find( e => e.date === week.saturdayCode)
                 
                 if (sundayHours || mondayHours || tuesdayHours || wednesdayHours || thursdayHours || fridayHours || saturdayHours)
-                return (<div key = {week.sundayCode}>{week.sunday} through {week.saturday}
-                        <div className="row">
+                return (<div key = {week.sundayCode}><div className="row m-2 p-1 border">{week.sunday} through {week.saturday}</div>
+                        <div className="m-2 p-1 row border">
                         <div className="col">
                             <div>Sunday</div>
                             {sundayHours && <div>{sundayHours.startTime} to {sundayHours.endTime}</div>}
