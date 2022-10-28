@@ -94,7 +94,7 @@ const AllExams = () => {
                         <div>Length: {listexam.standardLength}</div>
                         <div>Calculator: {listexam.calculator}</div>
                         <div>Notes: {listexam.notes}</div>
-                        <div>Other: {listexam.calculator}</div>
+                        <div>Other: {listexam.other}</div>
                         <div><button type="button" className="btn btn-outline-success" onClick={()=> openFile(listexam._id, listexam.name)}><VscFilePdf/></button></div>
                     </div>
                     <div className="col-1"><button type="button" className="btn btn-outline-danger" onClick={()=>deleteExam(listexam._id, listexam.name)}><VscTrash/></button></div>
