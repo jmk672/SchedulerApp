@@ -466,8 +466,8 @@ const SetHours = () => {
                 const saturdayHours = data.find( e => e.date === week.saturdayCode)
                 
                 if (sundayHours || mondayHours || tuesdayHours || wednesdayHours || thursdayHours || fridayHours || saturdayHours)
-                return (<div>{week.sunday} through {week.saturday}
-                        <div key = {week.sundayCode} className="row">
+                return (<div key = {week.sundayCode}>{week.sunday} through {week.saturday}
+                        <div className="row">
                         <div className="col">
                             <div>Sunday</div>
                             {sundayHours && <div>{sundayHours.startTime} to {sundayHours.endTime}</div>}
