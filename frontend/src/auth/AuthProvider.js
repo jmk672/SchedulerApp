@@ -2,9 +2,19 @@ import { useState } from 'react'
 import AuthContext from "./AuthContext";
 
 export const AuthProvider = ({children}) => {
-
+    
+    const getPayloadFromToken = token => {
+        if(!token) return {}
+        const encodedPayload = token.split('.')[1]
+        return JSON.parse(atob(encodedPayload))
+    }
+    
     // formerly useToken
     const [token, setTokenInternal] = useState(() => {
+        if (localStorage.getItem('token')) {
+            const newUser = getPayloadFromToken(localStorage.getItem('token'))
+            if (Date.now()/1000 > newUser.exp) localStorage.removeItem('token')
+        }
         return localStorage.getItem('token');
     })
 
@@ -21,11 +31,7 @@ export const AuthProvider = ({children}) => {
         if (!newToken) setUser(null)
     }
 
-    const getPayloadFromToken = token => {
-        if(!token) return {}
-        const encodedPayload = token.split('.')[1]
-        return JSON.parse(atob(encodedPayload))
-    }
+
 
     // formerly useUser
     const [user, setUser] = useState(() => {
