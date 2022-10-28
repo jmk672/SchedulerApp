@@ -1,11 +1,12 @@
 import useAuthContext from "../auth/useAuthContext"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 //import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import api from "../api"
 
 const NewExam = () => {
-
+        const [users, setUsers] = useState()
+        const [courses, setCourses] = useState()
         const [name, setName] = useState('')
         const [owner, setOwner] = useState('')
         const [courseNumber, setCourseNumber] = useState()
@@ -20,8 +21,29 @@ const NewExam = () => {
         const [success, setSuccess] = useState('')
     
         const { token } = useAuthContext()
-    //    const navigate = useNavigate()
     
+        useEffect(() => {
+            const fetch = async ()=> {
+                try {
+                    const res = await axios.get(api + '/users/',
+                    {
+                        headers: { Authorization: `Bearer ${token}`,
+                                   'Content-Type': 'multipart/form-data' }
+                   })
+                   if(res.data) setUsers(res.data)
+                } catch (err) { setError(err.message) }
+            }
+            fetch()
+        }, [token])
+
+        useEffect(()=> {
+            if (users) {
+                if (users.find((user)=>(user.id === owner))) {
+                    const uniqueCourses = [
+                        ...new Set(users.find((user)=>(user.id === owner)).courses.map( course => course.courseNumber ))]
+                setCourses(uniqueCourses)
+                }}
+        }, [owner, users])
     
         const submit = async (event) => {
             event.preventDefault()
@@ -78,13 +100,28 @@ const NewExam = () => {
 
  
                     <div className="form-outline mb-2">
-                        <input type="text"  className="form-control" value={owner} onChange={e => setOwner(e.target.value)}/>
-                        <label className="form-label">Owner (abc123) </label>
+                        <select className="form-control" value={owner} onChange={e => setOwner(e.target.value)}>
+                                <option value=''></option>
+                            {users && users.map((listuser) => (
+                                <option key={listuser.id} value={listuser.id} >
+                                    {listuser.lastName}, {listuser.firstName} ({listuser.id})
+                                </option>
+                            ))}
+                        </select>
+                        <label className="form-label" >Owner</label>
                     </div>
                 
     
                 <div className="form-outline mb-2">
-                    <input type="text" className="form-control" value={courseNumber} onChange={e => setCourseNumber(e.target.value)}/>
+                    <select className="form-control" value={courseNumber} onChange={e => setCourseNumber(e.target.value)}>
+                        <option value=''></option>
+                            {courses && 
+                            courses.map((course) => (
+                                <option key={course} value={course} >
+                                    {course}
+                                </option>
+                            ))}
+                        </select>
                     <label className="form-label">Course Number</label>
                 </div>
             </div>
