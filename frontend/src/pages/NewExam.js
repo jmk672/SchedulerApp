@@ -39,9 +39,10 @@ const NewExam = () => {
         useEffect(()=> {
             if (users) {
                 if (users.find((user)=>(user.id === owner))) {
-                    const uniqueCourses = [
-                        ...new Set(users.find((user)=>(user.id === owner)).courses.map( course => course.courseNumber ))]
-                setCourses(uniqueCourses)
+                    const uniqueCourses = new Set(users.find((user)=>(user.id === owner)).courses.map( course => course.courseNumber ))
+                    for (const course of users.find((user)=>(user.id === owner)).coordinates) uniqueCourses.add(course.courseNumber)
+                    
+                    setCourses([...uniqueCourses])
                 }}
         }, [owner, users])
     
