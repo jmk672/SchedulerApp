@@ -175,7 +175,6 @@ const SetHours = () => {
 
     return (
         <div className="row">
-        <div className="col-md-1"/>
         <div className="mt-4 mx-2 col-md-10">
              {error && 
                 <div className="alert alert-danger alert-dismissible fade show my-1" role="alert">

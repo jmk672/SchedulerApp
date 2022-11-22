@@ -4,7 +4,7 @@ import Hours from '../models/hoursModel.js'
 import { isTimeAvailable, timeTable, timeTableInverse } from '../utils/isTimeAvailable.js'
 import { createError } from '../utils/error.js'
 
-// gets all appointments for a day
+// gets all appointments
 export const getAllAppointments = async (req, res, next) => {
     try {
         const appointments = await Appointment.find({})
@@ -19,7 +19,7 @@ export const createAppointment = async ( req, res, next ) => {
         const hours = await Hours.findOne({date: req.body.day})
         const i=timeTable[req.body.time]
         const thisExam = await Exam.findById(req.body.examId)
-        const appointments = await Appointment.find({})
+        const appointments = await Appointment.find({date: req.body.day})
 
 
         var appointmentArray = []
