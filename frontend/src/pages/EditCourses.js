@@ -106,7 +106,7 @@ const EditCourses = () => {
                 </div>
                 <button disabled={!activeUser} type="button" className="btn btn-outline-primary my-2 me-2" 
                     onClick={()=>{
-                        setActiveUserObject({ courses: activeUserObject.courses.concat([{courseNumber: '', sectionNumber: ''}]) })}}>
+                        setActiveUserObject({ courses: activeUserObject.courses.concat([{courseNumber: ''}]) })}}>
                         <VscAdd/></button>
                         <button disabled={!activeUser} type="submit" className="btn btn-primary btn-block my-1">Update</button>
             </form>
