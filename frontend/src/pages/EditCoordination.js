@@ -50,7 +50,7 @@ const EditCoordination = () => {
             setActiveUser('')
             const tempdata = data.map((u, i) => {
                 if (u.id===activeUser) {
-                    const {courses, ...rest} = u
+                    const {coordinates, ...rest} = u
                     return {coordinates: coordinatesArray, ...rest}}
                 return u
             }
@@ -106,7 +106,7 @@ const EditCoordination = () => {
                 </div>
                 <button disabled={!activeUser} type="button" className="btn btn-outline-primary my-2 me-2" 
                     onClick={()=>{
-                        setActiveUserObject({ courses: activeUserObject.coordinates.concat([{courseNumber: ''}]) })}}>
+                        setActiveUserObject({ coordinates: activeUserObject.coordinates.concat([{courseNumber: ''}]) })}}>
                         <VscAdd/></button>
                         <button disabled={!activeUser} type="submit" className="btn btn-primary btn-block my-1">Update</button>
             </form>
