@@ -40,7 +40,7 @@ const EditCourses = () => {
         e.preventDefault()
         try {
 
-            const courseArray = activeUserObject.courses.filter( (course) => (course.courseNumber && course.sectionNumber))
+            const courseArray = activeUserObject.courses.filter( (course) => (course.courseNumber))
             const res = await axios.patch(api + '/users/' + activeUser,
             { courses: courseArray },
             {
@@ -101,12 +101,6 @@ const EditCourses = () => {
                                     temp[i].courseNumber = e.target.value
                                     setActiveUserObject({ courses: temp })}}/>
                             </div> 
-                            <div className="col-md-6"><label className="form-label mb-0 mt-1">Section Number</label><input type="number" min="1" className="form-control" value={c.sectionNumber}
-                                onChange={(e)=>{ 
-                                    let temp = activeUserObject.courses
-                                    temp[i].sectionNumber = e.target.value
-                                    setActiveUserObject({ courses: temp })}}/>
-                            </div>
                         </div>
                     )) }
                 </div>

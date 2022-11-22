@@ -52,7 +52,7 @@ const Admin = () => {
                 <li className="list-group-item d-flex" key={listuser._id}>
                     <div className="col-5">{listuser.firstName} {listuser.lastName}{listuser.isAdmin && ', administrator'}</div>
                     <div className="col-6">{listuser.courses && listuser.courses.map((course) => (
-                    <div key={course._id}>Math {course.courseNumber}, section {course.sectionNumber} </div>))}</div>
+                    <div key={course._id}>Math {course.courseNumber} </div>))}</div>
                     <div className="col-1">{user.id !== listuser.id && <button type="button" className="btn btn-outline-danger" onClick={()=>deleteUser(listuser.id)}><VscTrash/></button>}</div>
                 </li>
                 ))}
