@@ -16,9 +16,35 @@ export const getAllAppointments = async (req, res, next) => {
 
 export const createAppointment = async ( req, res, next ) => {
     try{
+        const hours = await Hours.findOne({date: req.body.day})
+        const i=timeTable[req.body.time]
+        const thisExam = await Exam.findById(req.body.examId)
+        const appointments = await Appointment.find({})
+
+
+        var appointmentArray = []
+        for (const appointment of appointments) {
+            const appointmentExam = await Exam.findById(appointment.examId)
+
+            if (!appointmentExam) return(next( createError(400, "No Exam Found")))
+
+            const appointmentLength = appointmentExam.standardLength + appointment.extraTime
+
+            appointmentArray.push({time: timeTable[appointment.time], length: Math.ceil(appointmentLength/15)})
+        }
+        appointmentArray.sort(function(a, b){return a.time - b.time})
+
+        if (!thisExam) return(next( createError(400, "No Exam Found")))
+
+        if (!req.user.isAdmin && !isTimeAvailable(i, thisExam.length+req.body.extraTime, appointmentArray, hours.open, hours.close, hours.seats)) return(next( createError(400, "Time not Available")))
+
+        console.log(req.body.instructor)
+        if (!req.body.instructor) req.body.instructor = req.user.id
+        console.log(req.body.instructor)
+
         const exam = await Appointment.create({
             student: req.body.student, 
-            instructor: req.user.id,
+            instructor: req.body.instructor,
             examId: req.body.examId,
             day: req.body.day,
             time: req.body.time,
