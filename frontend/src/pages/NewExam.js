@@ -79,7 +79,7 @@ const NewExam = () => {
         return(
         <div className="row">
         <div className="col-md-1"/>
-        <div className="mt-4 mx-2 col-md-8">
+        <div className="mt-4 mx-2 col-md-4">
             <form onSubmit={e => submit(e)}>
                 <div className="row mt-2">
                     <div className="form-outline">
