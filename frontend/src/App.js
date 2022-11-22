@@ -16,6 +16,7 @@ import AllAppointments from './pages/AllAppointments';
 import NewExam from './pages/NewExam';
 import SetHours from './pages/SetHours';
 import EditCoordination from './pages/EditCoordination';
+import AddAppointment from './pages/AddAppointment';
 
 function App() {
   return (
@@ -41,7 +42,7 @@ function App() {
                   <Route path="/admin/addExam" element={ <NewExam/>} />
                   <Route path="/admin/allAppointments" element={ <AllAppointments/>} />
                   <Route path="/admin/setHours" element={ <SetHours /> } />
-                  <Route path="/admin/schedule" element={ <h1>Schedule makeup</h1>} />
+                  <Route path="/admin/schedule" element={ <AddAppointment/> } />
                   <Route path="/instructor/home" element={ <Instructor/>} />
                   <Route path="/instructor/addExam" element={ <h1>Add new exam</h1>} />
                   <Route path="/instructor/schedule" element={ <h1>Schedule makeup</h1>} />
