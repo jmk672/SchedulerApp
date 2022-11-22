@@ -14,6 +14,7 @@ import EditCourses from './pages/EditCourses';
 import AllExams from './pages/AllExams';
 import NewExam from './pages/NewExam';
 import SetHours from './pages/SetHours';
+import EditCoordination from './pages/EditCoordination';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
                   <Route path="/admin/users" element={ <Admin />} />
                   <Route path="/admin/addUser" element={ <AddUser />} />
                   <Route path="/admin/editCourses" element={ <EditCourses />} />
+                  <Route path="/admin/editCoordination" element={ <EditCoordination />} />
                   <Route path="/admin/allExams" element={ <AllExams />} />
                   <Route path="/admin/addExam" element={ <NewExam/>} />
                   <Route path="/admin/allAppointments" element={ <h1>All Appointments</h1>} />
